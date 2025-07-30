@@ -2,8 +2,8 @@
 import type { Metadata } from "next";
 import { Roboto, Fjalla_One } from "next/font/google";
 import "./globals.css";
-import Cabecalho from "./components/Cabecalho";
-import Menu from "./components/Menu";
+import Cabecalho from "../components/Cabecalho";
+import Menu from "../components/Menu";
 
 /* Configura variáveis para as fontes */
 const roboto = Roboto({
