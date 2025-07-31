@@ -2,6 +2,15 @@
 
 Projeto de uma aplicação web SPA usando NEXT.js, Typescript e Supabase (Baas - Back-End as a Service).
 
+## 03_componentes-cabeçalho-menu-e-modulos-de-estilo
+
+- Criação de componentes `Cabecalho` e `Menu`
+- Deinifição de link ativo no menu estilzando o hook `usePathName`
+- Ativação e renderização de componente em modo cliente com `use client`
+- Importação e aplicação de módulos CSS
+
+---
+
 ## 02_paginas-basicas-links-ajustes-de-layout-metadados
 
 - Criação das páginas/rotas (usando pastas e arquivo page)
