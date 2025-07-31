@@ -1,5 +1,4 @@
 // src/components/Container.tsx
-import React from "react";
 import estilos from "./Container.module.css";
 
 type ContainerProps = {
