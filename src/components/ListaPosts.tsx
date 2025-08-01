@@ -9,14 +9,14 @@ type ListaPostsProps = {
   posts: Post[];
 };
 export default function ListaPosts({ posts }: ListaPostsProps) {
-  console.log(posts);
-
   return (
     <div className={estilos.posts}>
-      <article>
-        <h3>Título do post...</h3>
-        <p>Subtítulo do post...</p>
-      </article>
+      {posts.map((post) => (
+        <article key={post.id}>
+          <h3>{post.titulo}</h3>
+          <p>{post.subtitulo}</p>
+        </article>
+      ))}
     </div>
   );
 }
