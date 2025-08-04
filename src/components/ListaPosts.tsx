@@ -2,9 +2,6 @@
 import { Post } from "@/types/Post";
 import estilos from "./ListaPosts.module.css";
 
-/* Configurando um tipo para este componente e, 
-neste tipo, definimos a prop posts relacionando ela ao tipo 
-Post criado anteriormente.*/
 type ListaPostsProps = {
   posts: Post[];
 };
@@ -16,12 +13,6 @@ export default function ListaPosts({ posts }: ListaPostsProps) {
           <h3>{post.titulo}</h3>
           <p>{post.subtitulo}</p>
         </article>
-
-        // {posts.map(({ id, titulo, subtitulo }) => (
-        // <article key={id}>
-        //   <h3>{titulo}</h3>
-        //   <p>{subtitulo}</p>
-        // </article> (versão desestrurada)
       ))}
     </div>
   );
