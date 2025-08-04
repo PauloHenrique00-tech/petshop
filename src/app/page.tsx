@@ -1,6 +1,5 @@
 import ListaPosts from "@/components/ListaPosts";
 import estilos from "./page.module.css";
-import arrayPosts from "@/data/array-posts";
 import { Post } from "@/types/Post";
 
 export default async function Home() {
@@ -21,7 +20,7 @@ export default async function Home() {
     <section className={estilos.conteudo}>
       <h2>Pet Notícias</h2>
       <p>Notícias atualizadas sobre o mundo pet</p>
-      <ListaPosts posts={arrayPosts} />
+      <ListaPosts posts={posts} />
     </section>
   );
 }
