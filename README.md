@@ -4,7 +4,7 @@ Projeto de uma aplicação web SPA usando NEXT.js, Typescript e Supabase (Baas -
 
 ## 05_home-com-lista-de-posts-a-partir-de-um-array
 
-- Configuração e exportção de um novo tipo `Post.ts`
+- Configuração e exportação de um novo tipo `Post.ts`
 - Adição de um array de dados: `array-posts.ts`
 - Componente `ListaPosts.tsx` com prop `posts`
 - Utilização do `map` para renderizar os <article> com o conteúdo dinâmico de cada post
