@@ -1,6 +1,7 @@
 import ListaPosts from "@/components/ListaPosts";
 import estilos from "./page.module.css";
 import { Post } from "@/types/Post";
+import SemPosts from "@/components/SemPosts";
 
 export default async function Home() {
   const resposta = await fetch(`http://localhost:2112/posts`, {
@@ -19,8 +20,9 @@ export default async function Home() {
   return (
     <section className={estilos.conteudo}>
       <h2>Pet Notícias</h2>
-      <p>Notícias atualizadas sobre o mundo pet</p>
-      <ListaPosts posts={posts} />
+
+      {/* Renderização condicional */}
+      {posts.length === 0 ? <SemPosts /> : <ListaPosts posts={posts} />}
     </section>
   );
 }
