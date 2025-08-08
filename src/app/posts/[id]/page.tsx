@@ -2,21 +2,21 @@
 import Container from "@/components/Container";
 import estilos from "./detalhe-post.module.css";
 import { Post } from "@/types/Post";
+import { notFound } from "next/navigation";
 
 type DetalhePostProps = {
   params: Promise<{ id: string }>;
 };
 
-/* A função abaixo precisa:
-- Receber o id como string
-- Executar o acesso à API usando este id e retornar o post com os dados
-- O retorno da função DEVE SER uma Promise
-- Não se esqueça de chamar/usar esta nova função dentro do generateMetada e do
-DetalhePost no lugar do código que você irá remover. */
 async function buscarPostPorId(id: string): Promise<Post> {
   const resposta = await fetch(`http://localhost:2112/posts/${id}`, {
     next: { revalidate: 0 },
   });
+
+if (resposta.status === 404) {
+  // Buscar a page not-foound.tsx automticamente em caso de erro 404
+  notFound();
+}
 
   if (!resposta.ok) {
     throw Error("Erro ao buscar o post: " + resposta.statusText);
