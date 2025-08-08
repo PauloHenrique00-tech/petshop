@@ -14,8 +14,7 @@ async function buscarPostPorId(id: string): Promise<Post> {
   });
 
 if (resposta.status === 404) {
-  // Buscar a page not-foound.tsx automticamente em caso de erro 404
-  notFound();
+  notFound();  
 }
 
   if (!resposta.ok) {
@@ -40,17 +39,9 @@ export async function generateMetadata({ params }: DetalhePostProps) {
 
 export default async function DetalhePost({ params }: DetalhePostProps) {
   const { id } = await params;
-  console.log(id);
+  const post = await buscarPostPorId(id);
 
-  const resposta = await fetch(`http://localhost:2112/posts/${id}`, {
-    next: { revalidate: 0 },
-  });
-
-  if (!resposta.ok) {
-    throw new Error("Erro ao carregar o post");
-  }
-
-  const post: Post = await resposta.json();
+  
 
   return (
     <article className={estilos.conteudo}>
