@@ -2,12 +2,27 @@
 
 Projeto de uma aplicação web SPA usando NEXT.js, Typescript e Supabase (Baas - Back-End as a Service).
 
+## 06_fake-api-usando-json-server-e-aplicando-rota-dinamica
+
+- Instalação e configuração do `json-server` como dependência de desenvolvedor: Para instalar: `npm install json-server --save-dev`
+- Utilização do `fetch` com `async/await` na página Home para consumir os posts da fake-api
+- Exclusão do array de posts
+- Substituição do array fixo de posts por dados da fake-api
+- Configuração de rota dinâmica com carregamento de dados a partir de parâmetros da rota
+- Uso de `Promise` como tipo para a prop `params`
+- Geração de metadados dinâmicos usando a função `generateMetadata`
+- Refatoração da programação de busca de dados na fake-api usando uma função dedicada (`buscarPostPorId`)
+
+---
+
 ## 05_home-com-lista-de-posts-a-partir-de-um-array
 
 - Configuração e exportção de um novo tipo `Post.ts`
 - Adição de um array de dados: `array-posts.ts`
 - Componente `ListaPosts.tsx` com prop `posts`
 - Utilização do `map` para renderizar os <article> com o conteúdo dinâmico de cada post
+
+---
 
 ## 04_melhorias-nas-paginas-e-componente-container
 
