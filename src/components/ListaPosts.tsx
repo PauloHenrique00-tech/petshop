@@ -2,13 +2,16 @@
 import { Post } from "@/types/Post";
 import estilos from "./ListaPosts.module.css";
 import Link from "next/link";
+import FiltroCategorias from "./FiltroCategorias";
 
 type ListaPostsProps = {
   posts: Post[];
 };
 export default function ListaPosts({ posts }: ListaPostsProps) {
   return (
-    <div className={estilos.posts}>
+    <>
+    <FiltroCategorias/>
+<div className={estilos.posts}>
       {posts.map((post) => (
         <article key={post.id}>
           <Link href={`/posts/${post.id}`}>
@@ -16,13 +19,8 @@ export default function ListaPosts({ posts }: ListaPostsProps) {
             <p>{post.subtitulo}</p>
           </Link>
         </article>
-
-        // {posts.map(({ id, titulo, subtitulo }) => (
-        // <article key={id}>
-        //   <h3>{titulo}</h3>
-        //   <p>{subtitulo}</p>
-        // </article> (versão desestrurada)
       ))}
-    </div>
+</div>
+    </>
   );
 }
