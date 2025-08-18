@@ -22,6 +22,13 @@ ou string (que é o tipo para nomes/textos referentes às categorias).
 Passamos null entre parênteses indicando que por padrão não há categoria selecionada. */ 
 const [categoriaAtiva, setCategoriaAtiva] = useState<null | string>(null);
 
+const postsFiltrados = categoriaAtiva 
+? posts.filter(post => post.categoria === categoriaAtiva)
+: posts;
+
+console.log(postsFiltrados);
+
+
   return (
     <>
     <FiltroCategorias/>
