@@ -1,8 +1,12 @@
 // src/components/ListaPosts.tsx
+
+"use client";
+
 import { Post } from "@/types/Post";
 import estilos from "./ListaPosts.module.css";
 import Link from "next/link";
 import FiltroCategorias from "./FiltroCategorias";
+import { useState } from "react";
 
 type ListaPostsProps = {
   posts: Post[];
@@ -12,7 +16,9 @@ export default function ListaPosts({ posts }: ListaPostsProps) {
    que não há repetição de categorias usando spread e new Set*/ 
   const categorias = [...new Set(posts.map((post) => post.categoria))];
   console.log(categorias);
-  
+
+const [categoriaAtiva, setCategoriaAtiva] = useState();
+
   return (
     <>
     <FiltroCategorias/>
