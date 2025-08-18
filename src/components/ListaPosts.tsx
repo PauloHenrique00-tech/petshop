@@ -7,8 +7,6 @@ import estilos from "./ListaPosts.module.css";
 import Link from "next/link";
 import FiltroCategorias from "./FiltroCategorias";
 import { useState } from "react";
-import SemPosts from "./SemPosts";
-
 
 type ListaPostsProps = {
   posts: Post[];
@@ -36,12 +34,15 @@ console.log(postsFiltrados);
   return (
     <>
     <FiltroCategorias/>
+<<<<<<< HEAD
 
 {/* Caso não tenha posts, renderiza SemPosts */}
 {postsFiltrados.length === 0 && <SemPosts/> }
 
+=======
+>>>>>>> parent of 5769580 (Aplica filtro de posts)
 <div className={estilos.posts}>
-      {postsFiltrados.map((post) => (
+      {posts.map((post) => (
         <article key={post.id}>
           <Link href={`/posts/${post.id}`}>
             <h3>{post.titulo}</h3>
