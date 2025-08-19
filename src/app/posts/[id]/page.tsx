@@ -13,9 +13,9 @@ async function buscarPostPorId(id: string): Promise<Post> {
     next: { revalidate: 0 },
   });
 
-if (resposta.status === 404) {
-  notFound();  
-}
+  if (resposta.status === 404) {
+    notFound();
+  }
 
   if (!resposta.ok) {
     throw Error("Erro ao buscar o post: " + resposta.statusText);
@@ -35,13 +35,9 @@ export async function generateMetadata({ params }: DetalhePostProps) {
   };
 }
 
-/* DESAFIO! Faça um novo fetch na API usando este ID e mostre no HTML abaixo os dados obtidos! */
-
 export default async function DetalhePost({ params }: DetalhePostProps) {
   const { id } = await params;
   const post = await buscarPostPorId(id);
-
-  
 
   return (
     <article className={estilos.conteudo}>
