@@ -44,7 +44,7 @@ console.log(postsFiltrados);
 {postsFiltrados.length === 0 && <SemPosts/> }
 
 <div className={estilos.posts}>
-      {posts.map((post) => (
+      {postsFiltrados.map((post) => (
         <article key={post.id}>
           <Link href={`/posts/${post.id}`}>
             <h3>{post.titulo}</h3>
