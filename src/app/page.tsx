@@ -1,27 +1,25 @@
+// src/app/page.tsx
 import ListaPosts from "@/components/ListaPosts";
 import estilos from "./page.module.css";
 import { Post } from "@/types/Post";
 import SemPosts from "@/components/SemPosts";
 
-export default async function Home() {
-  const resposta = await fetch(`http://localhost:2112/posts`, {
-    // Revalidamos o cache do next a cada requisição para garantir
-    // que os dados estejam sempre atualiados
-    next: { revalidate: 0 },
-  });
+// Importando os recursos da lib supabase
+import { supabase } from "@/lib/supabase";
 
-  if (!resposta.ok) {
-    throw new Error("Erro ao buscar os posts:" + resposta.statusText);
+export default async function Home() {
+  const { data, error } = await supabase.from("posts").select("*");
+
+  if (error) {
+    throw new Error("Erro ao buscar os posts: " + error.message);
   }
 
-  const posts: Post[] = await resposta.json();
-  console.log(posts);
+  const posts: Post[] = data;
 
   return (
     <section className={estilos.conteudo}>
       <h2>Pet Notícias</h2>
 
-      {/* Renderização condicional */}
       {posts.length === 0 ? <SemPosts /> : <ListaPosts posts={posts} />}
     </section>
   );
