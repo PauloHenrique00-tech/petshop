@@ -6,7 +6,12 @@ export default function Formulario() {
     <form action="" className={estilos.formulario}>
       <div className={estilos.campo}>
         <label htmlFor="nome">Nome</label>
-        <input type="text" name="nome" id="nome" />
+        <input
+          type="text"
+          name="nome"
+          id="nome"
+          placeholder="Digite o nome completo"
+        />
       </div>
       <div className={estilos.campo}>
         <label htmlFor="email">Email</label>
