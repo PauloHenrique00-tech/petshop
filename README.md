@@ -1,36 +1,135 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PetShop
 
-## Getting Started
+Projeto de uma aplicação web SPA usando NEXT.js, Typescript e Supabase (Baas - Back-End as a Service).
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 10_rotinas-do-formulario-de-contato
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Criação do componente `Formulario` e importação na página de Contato
+- Programação de uma **ação de servidor (server action)**:`lib/enviar-contato.ts`:
+  - É uma função que executa no back-end, por isso, a diretiva `'use-server'`
+  - Responsável por receber, validar, e enviar os dados para o Supabase
+- Gerenciamento de `state` do `Formulário` e do `BotaoEnviar` visando melhorar a experiência do usuário demonstrando o status do processamento através de mensagens e estilos personalizados.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 09_migrando-api-para-supabase
 
-## Learn More
+### No site supabase.com
 
-To learn more about Next.js, take a look at the following resources:
+- Cadastro no Supabase usando a conta do Github
+- Criação e configuração de um projeto dentro do Supabase
+- Criação da tabela `posts` com os campos:
+  - id (uuid), pk
+  - tiulo (text), not null
+  - descricao (text), not null
+  - categoria (text), not null
+- Importação dos dados para a tabela usando o formato `csv`
+- Adição de uma política de segurança para `SELECT` público
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### No projeto PetShop (VSCode)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+#### Configuração geral
 
-## Deploy on Vercel
+- Instalação da lib `npm install @supabase/supabase-js`
+- Criação do arquivo contendo variáveis de ambiente: `.env.local`, com a aplicação das variáveis `NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_SUPABASE_ANON_KEY`. Obs.: o conteúdo para este arquivo está pronto em sua conta no Supabase, dentro do botão **CONNECT**.
+- Criação da pasta `lib` e do arquivo `supabase.ts`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### Páginas Home (app/page.tsx) e DetalhePost (app/posts/[id]/page.tsx)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Subtítulo da função `fetch` e do acesso à fake-api pela função e recursos do supabase
+- Ajustes nas verificações de erro
+- Criação de um componente especial de `loading` (exibido enquanto o processamento dos posts está acontecendo)
+
+---
+
+## 08_filtro-de-categorias
+
+- ### Resumo do ciclo de comunicação da prop que passa para uma função do pai (ListaPosts) para o filho (FiltroCategorias)
+
+- Usuário clica em um botão do FiltroCategorias (Filho)
+- Esse clique (`onClick`) ele "chama" a prop `ao selecionar` passando pra ela a categoria escolhida (por exemplo, 'bem-estar')
+- O `ao selecionar` na verdade é um apontamento para o `setCategoriaAtiva` definida no pai (ListaPosts)
+- O Reat/Next atualiza o estado (o state `categoriaAtiva`) do pai
+- O pai (ListaPosts) reexecuta com o novo estado, exibindo os posts conforme a categoria ativa
+- O `postsFiltrados` é atualizado e os posts filtrados aparecem.
+
+Em resumo, o filho **não muda o estado sozinho**. Ele só **avisa** o pai.
+
+Quem tem o estado, tem o controle.
+
+---
+
+## 07_componentes-SemPosts-e-notFound-da-rota-de-posts
+
+- Criação do componete `SemPosts.tsx` e aplicação de renderização condicional na page `Home`
+- Criação da page `not-found.tsx` e aplicação na rota dinâmica de posts usando verificação de erro status 404 e chamada da função `not-found()`.
+
+---
+
+## 06_fake-api-usando-json-server-e-aplicando-rota-dinamica
+
+- Instalação e configuração do `json-server` como dependência de desenvolvedor: Para instalar: `npm install json-server --save-dev`
+- Utilização do `fetch` com `async/await` na página Home para consumir os posts da fake-api
+- Exclusão do array de posts
+- Substituição do array fixo de posts por dados da fake-api
+- Configuração de rota dinâmica com carregamento de dados a partir de parâmetros da rota
+- Uso de `Promise` como tipo para a prop `params`
+- Geração de metadados dinâmicos usando a função `generateMetadata`
+- Refatoração da programação de busca de dados na fake-api usando uma função dedicada (`buscarPostPorId`)
+
+---
+
+## 05_home-com-lista-de-posts-a-partir-de-um-array
+
+- Configuração e exportção de um novo tipo `Post.ts`
+- Adição de um array de dados: `array-posts.ts`
+- Componente `ListaPosts.tsx` com prop `posts`
+- Utilização do `map` para renderizar os <article> com o conteúdo dinâmico de cada post
+
+---
+
+## 04_melhorias-nas-paginas-e-componente-container
+
+- Adição de conteúdo às pages (Sobre, Produtos, Contato)
+- Utilização de imagem SVG na page Not Found
+- Criação e aplicação do componente Container usando children
+- Desativação do compilador Turbopack para evitar bugs de cache (em especial quando a alguns módulos CSS)
+
+---
+
+## 03_componentes-cabeçalho-menu-e-modulos-de-estilo
+
+- Criação de componentes `Cabecalho` e `Menu`
+- Deinifição de link ativo no menu estilzando o hook `usePathName`
+- Ativação e renderização de componente em modo cliente com `use client`
+- Importação e aplicação de módulos CSS
+
+---
+
+## 02_paginas-basicas-links-ajustes-de-layout-metadados
+
+- Criação das páginas/rotas (usando pastas e arquivo page)
+- Definição de metadados específicos para cada página
+- adição do componente `<Link>` para navegação entre as rotas
+- Ajustes diversos de estrutura HTML
+
+---
+
+## 01_css-global-fonts-favicon-metadados
+
+- Adição de estilos globais
+- Importação, configuração e aplicação de fonts da web usando `next/fonts`
+- Adição de mais metadados
+- Aplicação automática de favicon adicionando arquivo `icon.png` direto na pasta `app`
+
+## 00_projeto-zerado
+
+Ajustes e exclusões de elementos da instalação padrão do Next.js
+
+### Revisando tópicos importantes
+
+- `src/app/page.tsx`: página principal (index, Home). Obs.: o nome do arquivo **precisa ser** `page.tsx`, mas o nome interno (na função) pode ser qualquer um.
+
+- `src/app/layout.tsx`: componente/arquivo especial que define a estrutura padrão (layout) para todas as páginas.
