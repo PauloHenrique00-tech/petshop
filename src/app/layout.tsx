@@ -30,6 +30,14 @@ export const metadata: Metadata = {
       url: "https://github.com/PauloHenrique00-tech",
     },
   ],
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "petshop",
+    /* Se tivéssemos ícones específicos para dispositivos Apples, 
+    vc também colocaria aqui*/
+  },
 };
 
 export default function RootLayout({
